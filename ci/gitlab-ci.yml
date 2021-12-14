@@ -5,10 +5,9 @@ stages:
 # 打包镜像
 build:
   stage: build
-  image: ${BUILDX_IMAGE}
+  image: xxxx.docker:xxxx
   before_script:
     - echo "${DOCKER_PASSWORD}" | docker login "${DOCKER_REGISTRY}" -u="${DOCKER_USERNAME}" --password-stdin
-    - BUILDKIT_NAME=golang-buildkit hx buildx ci-setup
   script:
     - /bin/sh makefile.sh
 

@@ -3,10 +3,8 @@
 
 envsubst < /root/.mc/mc.config.tmpl > /root/.mc/config.json
 
-EMAIL=${EMAIL:-"sys-ops@rockontrol.com"}
+EMAIL=${EMAIL:-"xxxxxxxxxx"}
 
-## extract ref
-#     CI_COMMIT_REF_NAME=qcloud/wild.hw-dev.rtkl.xyz
 REF_NAME=${CI_COMMIT_REF_NAME}
 read PROVIDER DOMAINS <<< $(echo ${REF_NAME} | tr '/' ' ')
 
@@ -33,9 +31,9 @@ function qcloud()
 
 function archive()
 {
-    tar zcf ${DOMAINS}.tgz certificates && mc cp ${DOMAINS}.tgz cos/ops-software-binary-1255440668/nginx-certs/ && {
+    tar zcf ${DOMAINS}.tgz certificates && mc cp ${DOMAINS}.tgz cos/bucket/ && {
 
-        TGZ=https://ops-software-binary-1255440668.cos.ap-chengdu.myqcloud.com/nginx-certs/${DOMAINS}.tgz
+        TGZ=https://xxxxxxxxxx/${DOMAINS}.tgz
 
         echo ""
         echo $TGZ
