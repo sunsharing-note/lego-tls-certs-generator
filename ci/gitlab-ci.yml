@@ -1,0 +1,31 @@
+stages:
+  - build
+  - deploy
+
+# 打包镜像
+build:
+  stage: build
+  image: ${BUILDX_IMAGE}
+  before_script:
+    - echo "${DOCKER_PASSWORD}" | docker login "${DOCKER_REGISTRY}" -u="${DOCKER_USERNAME}" --password-stdin
+    - BUILDKIT_NAME=golang-buildkit hx buildx ci-setup
+  script:
+    - /bin/sh makefile.sh
+
+  only:
+    refs:
+      - master
+    changes:
+      - Dockerfile
+      - scripts/lego.sh
+      - makefile.sh
+      - .version
+
+gen:
+  stage: deploy
+  image: ${DOCKER_REGISTRY}/rk-devops/lego-tls-certs-generator:v1.0.6
+  script:
+    - /usr/bin/lego.sh
+  only:
+    refs:
+      - /^(aliyun|qcloud)\/.*$/
