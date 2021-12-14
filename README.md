@@ -22,12 +22,14 @@ git checkout -b <provider/domains>
 
 ```bash
 # provider/domains
-aliyun/wild.rockontrol.com
-qcloud/wild.querycap.com
+阿里云
+aliyun/wild.xxxxx.com
+腾讯云
+qcloud/wild.xxxxx.com
 ```
 
-1. `provider`: `aliyun/qcloud` 是为了区分不同的 token
-2. `domains`: wild 意味着通配置证书 `*.rockontrol.com`
+1. `provider`: `aliyun/qcloud` 是为了区分不同的 token，需要单独配置自己的变量
+2. `domains`: wild 意味着通配置证书 `*.xxx.com`
 3. 生成后， 会压缩并发送到 s3
-  + https://ops-software-binary-1255440668.cos.ap-chengdu.myqcloud.com/nginx-certs/${domains}.tgz
+  + https://xxxxxxxx/${domains}.tgz
 
